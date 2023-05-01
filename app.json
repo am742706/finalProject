@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "CityNavigation",
-    "slug": "CityNavigation",
+    "name": "BudgetApp",
+    "slug": "BudgetApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/bankVaultIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/icon.png",
+      "image": "./assets/bankVaultIcon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
