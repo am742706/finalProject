@@ -9,10 +9,12 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.18.1",
     "@react-navigation/drawer": "^6.6.0",
     "@react-navigation/native-stack": "^6.9.12",
     "expo": "~47.0.12",
     "expo-splash-screen": "^0.17.5",
+    "expo-sqlite": "~11.0.0",
     "expo-status-bar": "~1.4.2",
     "expo-updates": "~0.15.6",
     "react": "18.1.0",
@@ -20,7 +22,8 @@
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-paper": "^5.7.0",
-    "react-native-reanimated": "~2.12.0"
+    "react-native-reanimated": "~2.12.0",
+    "state-pool": "^0.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
