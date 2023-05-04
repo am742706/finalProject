@@ -11,12 +11,22 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Constants from "expo-constants";
 import * as SQLite from "expo-sqlite";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as WebBrowser from 'expo-web-browser';
 
 const amountKey = '@MyApp:amountKey';
 
 const Drawer = createNativeStackNavigator();
-// SplashScreen.preventAutoHideAsync();
-// setTimeout(SplashScreen.hideAsync, 2000);
+SplashScreen.preventAutoHideAsync();
+setTimeout(SplashScreen.hideAsync, 2000);
+
+const add = (amountsList) => {
+  var total = 0;
+  amountsList.map(({amount}) => (
+    total += amount
+  ))
+
+  return total
+}
 
 
 export default function App() {
@@ -48,6 +58,9 @@ export default function App() {
 
 function Items({navigation}) {
   const [items, setItems] = useState(null);
+  // const [total, setTotal] = useState(0);
+  // const [x, setX] = useState(0);
+  // const [amounts, setAmounts] = useState(null);
 
   useEffect(() => {
     db.transaction((tx) => {
@@ -55,25 +68,50 @@ function Items({navigation}) {
         `select amount, desc, type, category, date from item`, [],
         (_, { rows: { _array } }) => setItems(_array)
       );
+      // tx.executeSql(
+      //   `select amount from item`, [],
+      //   (_, { rows: { _array } }) => setAmounts(_array),
+      // );
+      // wait();
     });
   }, []);
+  // const wait = () => {
+  //   setTimeout(setTotal(add(amounts)), 5000);
+  // }
+  // useEffect(() => {
+  //   db.transaction((tx) => {
+  //     tx.executeSql(
+  //       `select amount from item`, [],
+  //       (_, { rows: { _array } }) => setAmounts(_array),
+  //     );
+  //     console.log(amounts);
+  //     setX(33);
+  //     setTotal(add(amounts));
+  //   });
+  // }, []);
 
+  // console.log(amounts)
   if (items === null || items.length === 0) {
     return null;
   }
-
+  
+//   useEffect(()=>{
+//   amounts.map(({amount}) => {
+    
+//     setTotal(amount + total),
+//     console.log(total);
+    
+//   });
+// }, []);
+ 
   return (
     <View style={styles.sectionContainer}>
       <View style={{height: "auto"}}>
         <ScrollView style={styles.scrollView}>
+          {/* <Text style={styles.text}>Amount of money in Bank: ${total}</Text> */}
           {items.map(({ id, amount, desc, type, category, date }) => (
           <View>
-            {/* <Text>Amount: {amount}</Text>
-            <Text>desc: {desc}</Text>
-            <Text>type: {type}</Text>
-            <Text>category: {category}</Text>
-            <Text>date: {date}</Text>
-            <Text> {}</Text> */}
+            
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate('Transaction Details', {
@@ -209,9 +247,9 @@ function Input({navigation}){
           <Text style={styles.buttonText}>See All Transactions</Text>  
         </Pressable>
 
-        <Image style={styles.image}
-        source={require('./assets/bankVaultIcon.png')} />
-
+        <Pressable  onPress={() => WebBrowser.openBrowserAsync('https://www.totaladvice.com.au/five-reasons-why-budgeting-is-so-important/')} style={styles.button}>
+        <Text style={styles.buttonText}>Reasons for a budget</Text>
+      </Pressable>
 
       <StatusBar style="auto" />
     </View>
@@ -434,7 +472,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 25,
+    fontSize: 23,
     
   },
 });
